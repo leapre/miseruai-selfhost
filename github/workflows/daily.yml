@@ -1,0 +1,32 @@
+name: WordPress Auto Post
+
+# 1) 手動でも 2) 毎日 AM02:00(JST) でも起動
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 17 * * *'   # 17:00 UTC = 02:00 JST
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
+    - name: Install deps
+      run: pip install requests
+
+    - name: Run posting script
+      env:                   # ここで Secrets を渡す
+        WP_URL:  ${{ secrets.WP_URL }}
+        WP_USER: ${{ secrets.WP_USER }}
+        WP_PASS: ${{ secrets.WP_PASS }}
+        KW:      ${{ secrets.KW }}
+        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      run: python pipeline/run.py
