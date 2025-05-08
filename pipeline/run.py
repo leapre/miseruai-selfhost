@@ -23,3 +23,11 @@ print("STATUS", r.status_code)
 print(json.dumps(r.json(), indent=2, ensure_ascii=False))
 if r.status_code != 201:
     raise SystemExit("投稿失敗")
+
+r = requests.post(f"{WP_URL}/wp-json/wp/v2/posts",
+                  json=payload,
+                  auth=(WP_USER, WP_PASS))
+
+print("STATUS", r.status_code)
+print("BODY  :", r.text)           # ← 追加
+r.raise_for_status()               # 4xx/5xx で例外
