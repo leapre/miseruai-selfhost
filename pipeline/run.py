@@ -31,3 +31,11 @@ r = requests.post(f"{WP_URL}/wp-json/wp/v2/posts",
 print("STATUS", r.status_code)
 print("BODY  :", r.text)           # ← 追加
 r.raise_for_status()               # 4xx/5xx で例外
+
+print("STATUS:", r.status_code)
+print("RAW  :", r.text[:500])          # 最初の 500 文字だけ表示
+try:
+    j = r.json()
+    print("PARSED:", json.dumps(j, indent=2, ensure_ascii=False))
+except ValueError:
+    print("※JSON ではありません")
