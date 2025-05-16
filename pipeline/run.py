@@ -33,9 +33,14 @@ print("BODY  :", r.text)           # ← 追加
 r.raise_for_status()               # 4xx/5xx で例外
 
 print("STATUS:", r.status_code)
-print("RAW  :", r.text[:500])          # 最初の 500 文字だけ表示
-try:
-    j = r.json()
-    print("PARSED:", json.dumps(j, indent=2, ensure_ascii=False))
-except ValueError:
-    print("※JSON ではありません")
+print("HEADERS:", r.headers)             # ← 応答ヘッダも出すと手掛かりが増えます
+print("RAW   :", r.text[:500])           # 先頭 500 文字だけ
+
+# JSON かどうか確認してからパース
+if r.headers.get("Content-Type", "").startswith("application/json"):
+    print("PARSED:", json.dumps(r.json(), indent=2, ensure_ascii=False))
+else:
+    print("※ JSON ではありません")
+
+if r.status_code != 201:
+    raise SystemExit("投稿失敗")
