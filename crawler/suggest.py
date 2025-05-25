@@ -35,3 +35,4 @@ with open(OUTCSV, "w", newline="", encoding="utf-8") as f:
         time.sleep(1)        # 1秒スリープでブロック回避
 
 print(f"✅ {len(seen)} keywords saved to {OUTCSV}")
+
