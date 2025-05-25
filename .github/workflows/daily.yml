@@ -23,12 +23,19 @@ jobs:
           python3 -m pip install --upgrade pip
           python3 -m pip install requests
 
+          # 追加：キーワード収集
+      - name: Collect Google suggest keywords
+        env:
+          SEED_KW: ${{ secrets.SEED_KW }}   # 任意。無ければデフォルト
+        run: python3 crawler/suggest.py
+
+      # 既存：記事生成 & 投稿
       - name: Run posting script
         env:
           WP_URL:  ${{ secrets.WP_URL }}
           WP_USER: ${{ secrets.WP_USER }}
           WP_PASS: ${{ secrets.WP_PASS }}
-          KW:      ${{ secrets.KW }}
+          KW:      ${{ secrets.KW }}         # ← 後で keywords.csv から読むよう拡張予定
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: python3 pipeline/run.py
 
