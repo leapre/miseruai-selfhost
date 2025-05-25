@@ -4,7 +4,7 @@ from datetime import date
 
 BASE   = "https://suggestqueries.google.com/complete/search"
 HEAD   = {"User-Agent": "Mozilla/5.0"}
-SEED   = os.getenv("SEED_KW", "転職 小売業")   # 環境変数で上書き可
+SEED = os.getenv("SEED_KW") or "転職 小売業"  # ← 空文字もフォールバック
 OUTDIR = "data"
 os.makedirs(OUTDIR, exist_ok=True)
 OUTCSV = f"{OUTDIR}/keywords_{date.today()}.csv"
