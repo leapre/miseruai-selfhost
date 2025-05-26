@@ -28,6 +28,9 @@ jobs:
         env:
           SEED_KW: ${{ secrets.SEED_KW }}   # 任意。無ければデフォルト
         run: python3 crawler/suggest.py
+      
+      - name: Clean keywords
+        run: python3 crawler/clean_keywords.py
 
       # 既存：記事生成 & 投稿
       - name: Run posting script
