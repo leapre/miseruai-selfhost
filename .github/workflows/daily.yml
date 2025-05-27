@@ -17,13 +17,14 @@ jobs:
       # - uses: actions/setup-python@v5
       #   with:
       #     python-version: '3.11'
-      
+
       - name: Install deps (system python)
         run: |
           python3 -m pip install --upgrade pip
-          python3 -m pip uninstall -y charset-normalizer
-          python3 -m pip install requests "trafilatura[all]" tqdm
-          python3 -m pip install --no-binary charset-normalizer "charset-normalizer<3.4"        
+          python3 -m pip uninstall -y charset-normalizer regex
+          python3 -m pip install --no-binary ":all:" \
+              requests "trafilatura[all]" tqdm
+
 
       # ここからキーワード処理
       - name: Collect Google suggest keywords
