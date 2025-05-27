@@ -35,8 +35,8 @@ jobs:
         
       - name: Crawl site & extract HTML
         env:
-          SITE_BASE: ${{ vars.SITE_BASE }}
-        run: python3 crawler/crawl_site.py $SITE_BASE
+          SITE_BASE: ${{ vars.SITE_BASE }}   # Repository Variables に設定したURL
+        run: python3 crawler/crawl_site.py    # 引数は省略、環境変数を使う
 
       - name: Upload corpus
         uses: actions/upload-artifact@v4
