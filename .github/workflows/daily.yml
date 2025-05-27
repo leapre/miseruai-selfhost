@@ -21,12 +21,13 @@ jobs:
       - name: Install deps (system python)
         run: |
           python3 -m pip install --upgrade pip
-          python3 -m pip install requests
+          # クローラ関連
+          python3 -m pip install requests "trafilatura[all]" tqdm charset-normalizer
 
-          # 追加：キーワード収集
+      # ここからキーワード処理
       - name: Collect Google suggest keywords
         env:
-          SEED_KW: ${{ secrets.SEED_KW }}   # 任意。無ければデフォルト
+          SEED_KW: ${{ secrets.SEED_KW }}
         run: python3 crawler/suggest.py
       
       - name: Clean keywords
