@@ -21,8 +21,7 @@ jobs:
       - name: Install deps (system python)
         run: |
           python3 -m pip install --upgrade pip
-          # クローラ関連
-          python3 -m pip install requests "trafilatura[all]" tqdm charset-normalizer
+          python3 -m pip install requests "trafilatura[all]" tqdm 
 
       # ここからキーワード処理
       - name: Collect Google suggest keywords
