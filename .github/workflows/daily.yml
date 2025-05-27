@@ -31,6 +31,18 @@ jobs:
       
       - name: Clean keywords
         run: python3 crawler/clean_keywords.py
+        
+      - name: Crawl site & extract HTML
+        env:
+          SITE_BASE: ${{ vars.SITE_BASE }}
+        run: python3 crawler/crawl_site.py $SITE_BASE
+
+      - name: Upload corpus
+        uses: actions/upload-artifact@v4
+        with:
+          name: corpus-${{ github.run_number }}
+          path: data/corpus.jsonl
+          retention-days: 5
 
       # 既存：記事生成 & 投稿
       - name: Run posting script
