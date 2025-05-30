@@ -23,7 +23,8 @@ jobs:
           python3 -m pip install --upgrade pip
           python3 -m pip uninstall -y charset-normalizer regex
           python3 -m pip install --no-binary ":all:" \
-              requests "trafilatura[all]" tqdm
+            requests "trafilatura[all]" tqdm \
+            openai chromadb tiktoken
 
 
       # ここからキーワード処理
@@ -46,6 +47,11 @@ jobs:
           name: corpus-${{ github.run_number }}
           path: data/corpus.jsonl
           retention-days: 5
+
+      - name: Embed corpus & store to Chroma
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: python3 pipeline/embed_corpus.py
 
       # 既存：記事生成 & 投稿
       - name: Run posting script
