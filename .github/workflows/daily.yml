@@ -23,6 +23,11 @@ jobs:
           HOMEBREW_NO_AUTO_UPDATE: 1
         run: arch -arm64 brew install rust
 
+      - name: Install CMake (arm64)
+        env:
+          HOMEBREW_NO_AUTO_UPDATE: 1
+        run: arch -arm64 brew install cmake
+
       - name: Build Numpy arm64 from source
         env:
           PIP_BREAK_SYSTEM_PACKAGES: 1
@@ -42,7 +47,7 @@ jobs:
             requests "trafilatura[all]" tqdm \
             openai==1.10.0 "httpx<0.25" \
             "pydantic<2" chromadb tiktoken \
-            "hnswlib==0.8.2"
+            "git+https://github.com/nmslib/hnswlib@master#egg=hnswlib"
 
       # ここからキーワード処理
       - name: Collect Google suggest keywords
