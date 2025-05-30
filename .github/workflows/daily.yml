@@ -18,8 +18,10 @@ jobs:
       #   with:
       #     python-version: '3.11'
     
-      - name: Install Rust (for source builds)
-        run: brew install rust
+      - name: Install Rust toolchain (arm64)
+        env:
+          HOMEBREW_NO_AUTO_UPDATE: 1
+        run: arch -arm64 brew install rust
 
       - name: Install deps (system python)
         run: |
