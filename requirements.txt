@@ -1,3 +1,6 @@
-tiktoken>=0.6.0
-openai>=1.23.0
-chromadb>=0.5.0
+# ↓ 追加・変更
+openai==1.10.0      # ← Pydantic v1 系を使う最後期バージョン
+pydantic<2          # v1 を明示
+tiktoken
+chromadb
+# （既存行はそのままで OK）
