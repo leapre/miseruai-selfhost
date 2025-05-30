@@ -25,15 +25,16 @@ jobs:
 
       - name: Install deps (system python)
         env:
-          PIP_BREAK_SYSTEM_PACKAGES: 1     # PEP 668 回避
+          PIP_BREAK_SYSTEM_PACKAGES: 1
         run: |
+          set -x
           python3 -m pip install --upgrade pip
           python3 -m pip install \
             --no-binary charset-normalizer,regex \
             "charset-normalizer<3.4" regex \
             requests "trafilatura[all]" tqdm \
             openai==1.10.0 "httpx<0.25" \
-            "numpy<2.0" \    
+            "numpy<2.0" \
             "pydantic<2" chromadb tiktoken
 
       # ここからキーワード処理
