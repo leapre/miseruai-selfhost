@@ -46,7 +46,7 @@ jobs:
             "charset-normalizer<3.4" regex \
             requests "trafilatura[all]" tqdm \
             openai==1.10.0 "httpx<0.25" \
-            "pydantic<2" chromadb==0.4.24 tiktoken \
+            "pydantic<2" chromadb==0.4.13 tiktoken \
             "git+https://github.com/nmslib/hnswlib@master#egg=hnswlib"
 
       # ここからキーワード処理
