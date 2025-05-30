@@ -23,17 +23,19 @@ jobs:
           HOMEBREW_NO_AUTO_UPDATE: 1
         run: arch -arm64 brew install rust
 
-      - name: Install deps (system python)
+      - name: Build Numpy arm64 from source
         env:
           PIP_BREAK_SYSTEM_PACKAGES: 1
           ARCHFLAGS: "-arch arm64"
         run: |
-          set -x
-          python3 -m pip install --upgrade pip
-          python3 -m pip uninstall -y numpy || true
+          python3 -m pip uninstall -y numpy || true          # wheel が残っていても必ず削除
+          python3 -m pip install --no-binary :all: --no-cache-dir "numpy<2.0"
+
+      - name: Install remaining deps
+        env:
+          PIP_BREAK_SYSTEM_PACKAGES: 1
+        run: |
           python3 -m pip install \
-            --no-binary ":all:" --no-cache-dir \
-            "numpy<2.0"                         \
             --no-binary charset-normalizer,regex \
             "charset-normalizer<3.4" regex \
             requests "trafilatura[all]" tqdm \
