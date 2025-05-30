@@ -4,6 +4,9 @@ corpus.jsonl → OpenAI embeddings → ChromaDB(persist_directory="chroma")
 """
 
 import os, json, pathlib, tiktoken, openai, chromadb
+import hnswlib
+if not hasattr(hnswlib.Index, "file_handle_count"):
+    hnswlib.Index.file_handle_count = 0    # chromadb ≥0.4.14 対策
 from tqdm import tqdm
 
 DATA_PATH   = pathlib.Path("data/corpus.jsonl")
