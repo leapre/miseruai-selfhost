@@ -29,12 +29,13 @@ jobs:
         run: |
           set -x
           python3 -m pip install --upgrade pip
+          python3 -m pip uninstall -y numpy || true
           python3 -m pip install \
             --no-binary charset-normalizer,regex \
+            "numpy<2.0" \
             "charset-normalizer<3.4" regex \
             requests "trafilatura[all]" tqdm \
             openai==1.10.0 "httpx<0.25" \
-            "numpy<2.0" \
             "pydantic<2" chromadb tiktoken
 
       # ここからキーワード処理
