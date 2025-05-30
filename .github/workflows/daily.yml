@@ -28,9 +28,10 @@ jobs:
           PIP_BREAK_SYSTEM_PACKAGES: 1     # PEP 668 回避
         run: |
           python3 -m pip install --upgrade pip
+          python3 -m pip uninstall -y charset-normalizer regex pydantic_core || true
           python3 -m pip install \
-            --no-binary charset-normalizer,regex \
-            "charset-normalizer<3.4" regex \
+            --no-binary charset-normalizer,regex,pydantic-core \
+            "charset-normalizer<3.4" regex "pydantic-core<2.18" \
             requests "trafilatura[all]" tqdm \
             openai==1.10.0 pydantic<2 chromadb tiktoken
 
