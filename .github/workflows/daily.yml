@@ -42,7 +42,7 @@ jobs:
             requests "trafilatura[all]" tqdm \
             openai==1.10.0 "httpx<0.25" \
             "pydantic<2" chromadb tiktoken \
-            hnswlib
+            "hnswlib==0.8.0"
 
       # ここからキーワード処理
       - name: Collect Google suggest keywords
