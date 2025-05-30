@@ -26,13 +26,15 @@ jobs:
       - name: Install deps (system python)
         env:
           PIP_BREAK_SYSTEM_PACKAGES: 1
+          ARCHFLAGS: "-arch arm64"
         run: |
           set -x
           python3 -m pip install --upgrade pip
           python3 -m pip uninstall -y numpy || true
           python3 -m pip install \
+            --no-binary ":all:" --no-cache-dir \
+            "numpy<2.0"                         \
             --no-binary charset-normalizer,regex \
-            "numpy<2.0" \
             "charset-normalizer<3.4" regex \
             requests "trafilatura[all]" tqdm \
             openai==1.10.0 "httpx<0.25" \
