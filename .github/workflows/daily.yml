@@ -21,7 +21,7 @@ jobs:
       - name: Install deps (system python)
         run: |
           python3 -m pip install --upgrade pip
-          python3 -m pip uninstall -y charset-normalizer regex
+          python3 -m pip uninstall -y charset-normalizer regex tiktoken
           python3 -m pip install --no-binary ":all:" \
             requests "trafilatura[all]" tqdm \
             openai chromadb tiktoken
