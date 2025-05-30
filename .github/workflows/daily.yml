@@ -32,7 +32,8 @@ jobs:
             --no-binary charset-normalizer,regex \
             "charset-normalizer<3.4" regex \
             requests "trafilatura[all]" tqdm \
-            openai==1.10.0 "pydantic<2" chromadb tiktoken
+            openai==1.10.0 "httpx<0.25" \
+            "pydantic<2" chromadb tiktoken
 
       # ここからキーワード処理
       - name: Collect Google suggest keywords
